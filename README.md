@@ -1,0 +1,1 @@
+# justwatch-jw-scaler
