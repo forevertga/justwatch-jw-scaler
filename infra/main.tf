@@ -6,9 +6,16 @@ provider "helm" {
 
 resource "helm_release" "jw_scaler_storage_k8s_cluster" {
   name       = "jw-scaler-storage-k8s-cluster"
-  repository = "https://charts.bitnami.com/bitnami"
+  repository = "https://christianknell.github.io/helm-charts"
   chart      = "kube-ops-view"
   version    = "2.8.0"
+
+  //I added this to controll the context deadline for creating the terraform resources [https://developer.hashicorp.com/terraform/language/resources/syntax#operation-timeouts]
+#   timeouts {  
+#     create = "5m"
+#     update = "5m"
+#     delete = "5m"
+#   }
 
   set {
     name  = "service.type"
