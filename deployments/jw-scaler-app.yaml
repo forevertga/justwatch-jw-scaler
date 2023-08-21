@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jw-scaler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jw-scaler
+  template:
+    metadata:
+      labels:
+        app: jw-scaler
+    spec:
+      containers:
+        - name: jw-scaler
+          image: jw-scaler-app:latest
+          env:
+            - name: OBJECT_STORAGE_URL
+              value: "http://127.0.0.1:9000/"
+            - name: OBJECT_STORAGE_ACCESS_KEY
+              value: "AQSaLIobRvkjl26OiFtM"
+            - name: OBJECT_STORAGE_SECRET_KEY
+              value: "qo9CWjotAmwzpyuYEfKjMmfU9cTfZkoeDkPZgaGK"
+          resources:
+            requests:
+              cpu: "0.1"
+              memory: "100Mi"
+            limits:
+              cpu: "0.5"
+              memory: "500Mi"
